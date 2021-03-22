@@ -18,5 +18,13 @@
       "email": "halidram@text.com",
       "id": 5
     }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "israel berezin",
+      "email": "imbe@test.com",
+      "password": "123456"
+    }
   ]
 }
