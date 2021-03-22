@@ -1,0 +1,22 @@
+{
+  "restaurants": [
+    {
+      "id": 2,
+      "name": "OM restaurant",
+      "email": "om@text.com",
+      "address": "delhi sector 140"
+    },
+    {
+      "name": "mcdonals d restaurant",
+      "address": "delhi sector 120",
+      "email": "mcdonals@text.com",
+      "id": 3
+    },
+    {
+      "name": "halidram king d restaurant",
+      "address": "delhi sector 150",
+      "email": "halidram@text.com",
+      "id": 5
+    }
+  ]
+}
