@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
+import { BehaviorSubject, Observable } from 'rxjs';
+
 import { Resto } from '../resto';
 import { User } from '../user';
 
@@ -12,6 +14,13 @@ export class RestoService {
 
   url = 'http://localhost:3000/restaurants';
   rootUrl = 'http://localhost:3000/';
+  private user:User =  <User>{};
+  private _userSubject: BehaviorSubject<User> = new BehaviorSubject<User>(this.user ?? null);
+
+  public getUser(): Observable<User>{
+    return this._userSubject.asObservable();
+  }
+
 
   getList(){
     console.log("test test");
@@ -37,5 +46,29 @@ export class RestoService {
 
   registerUser(data:User){
     return this.http.post(this.rootUrl + "users", data);
+  }
+
+  getAllUsers(){
+    return this.http.get(this.rootUrl + "users");
+  }
+
+  login(email:string, password:string){
+    var found: boolean = false;
+     this.getAllUsers().subscribe((results =>{
+      const stringJson = JSON.stringify(results);
+      console.log("String json object :", stringJson);
+      const allUsers: Array<User> = JSON.parse(stringJson);
+      console.log(allUsers);
+      const isFound = allUsers.find(element => (element.email == email && element.password == password));
+      console.log("isFound =" + isFound);
+      if (isFound != undefined){
+        this.user = isFound
+      }else{
+        this.user =  <User>{};
+      }
+      this._userSubject.next(this.user)
+
+    }))
+
   }
 }
